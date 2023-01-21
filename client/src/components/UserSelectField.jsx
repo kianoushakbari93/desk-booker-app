@@ -10,11 +10,13 @@ import UserAvatar from "./UserAvatar";
 import "./Dashboard.css";
 
 const UserSelectField = ({ setUserId }) => {
-  const { client, user, desks} = useContext(AppContext);
+  const { client, user, desks } = useContext(AppContext);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(user);
 
-  const usersWithNoBooking = users.filter((u) => u.admin || !checkUserHasBooking(u, desks));
+  const usersWithNoBooking = users.filter(
+    (u) => u.admin || !checkUserHasBooking(u, desks)
+  );
 
   useEffect(() => {
     client.getUsers().then(({ data }) => {
@@ -26,12 +28,11 @@ const UserSelectField = ({ setUserId }) => {
     <Autocomplete
       onChange={(e, newValue) => {
         setSelectedUser(newValue);
-        setUserId(newValue.id)
+        setUserId(newValue.id);
       }}
       value={selectedUser}
       selectOnFocus
       clearOnBlur
-
       handleHomeEndKeys
       options={usersWithNoBooking}
       getOptionLabel={(option) => {
@@ -41,15 +42,21 @@ const UserSelectField = ({ setUserId }) => {
         return `${option.firstName} ${option.surname}`;
       }}
       renderOption={(props, option) => (
-        <ListItem {...props} disablePadding >
+        <ListItem {...props} disablePadding>
           <ListItemIcon className="avatarList">
-            <UserAvatar avatarId={option.avatarId}/>
+            <UserAvatar avatarId={option.avatarId} />
           </ListItemIcon>
-          <ListItemText primary={`${option.firstName} ${option.surname}`}/>
+          <ListItemText primary={`${option.firstName} ${option.surname}`} />
         </ListItem>
       )}
       fullWidth
-      renderInput={(params) => <TextField sx={{ input: {color: "whitesmoke"} }} {...params} label="Select User"/>}
+      renderInput={(params) => (
+        <TextField
+          sx={{ input: { color: "whitesmoke" } }}
+          {...params}
+          label="Select User"
+        />
+      )}
     />
   );
 };

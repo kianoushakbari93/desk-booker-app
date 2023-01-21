@@ -9,6 +9,6 @@ export const getDateObject = (dateValue) => {
 export const isBeforeToday = (date, today) => {
   today.setHours(0, 0, 0, 0);
   return date < today;
-}
+};
 
 export const getToday = () => new Date();

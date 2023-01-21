@@ -9,27 +9,26 @@ import "toastr/build/toastr.min.css";
 import toastr from "../customToastr";
 
 const VerificationForm = () => {
-
   const { client, setUser, logout } = useContext(AppContext);
 
   const handleSubmit = (values, setSubmitting) => {
-    client.verifyEmail(values.verificationToken)
+    client
+      .verifyEmail(values.verificationToken)
       .then(({ data }) => {
-        setUser(data)
+        setUser(data);
         toastr["success"]("Email verified!");
       })
       .catch((error) => {
         setSubmitting(false);
         toastr["error"]("Cannot verify your email");
-      })
-  }
+      });
+  };
   const resendVerification = (e) => {
     e.preventDefault();
-    client.resendVerification()
-      .then(() => {
-        toastr["success"]("A new verification token has been sent to your email")
-      })
-  }
+    client.resendVerification().then(() => {
+      toastr["success"]("A new verification token has been sent to your email");
+    });
+  };
 
   return (
     <Formik
@@ -37,11 +36,12 @@ const VerificationForm = () => {
         verificationToken: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        handleSubmit(values, setSubmitting)
+        handleSubmit(values, setSubmitting);
       }}
       validationSchema={Yup.object().shape({
-        verificationToken: Yup.string()
-          .required("Verification token is required"),
+        verificationToken: Yup.string().required(
+          "Verification token is required"
+        ),
       })}
     >
       {({ isValid, isSubmitting, errors }) => (

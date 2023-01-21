@@ -31,7 +31,7 @@ const FormTextField = ({ label, name, ...rest }) => (
 );
 
 FormTextField.defaultProps = {
-  inputGroupPrepend: null
+  inputGroupPrepend: null,
 };
 
 export default FormTextField;

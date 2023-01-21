@@ -17,28 +17,41 @@ const Dashboard = () => {
       <div className="topbar accent">
         <div className="userStatus">
           <Row>
-            <Col className = "avatarCol">
-              <UserAvatar width={"10vh"} height={"10vh"} border={"#EA7601"} avatarId={user.avatarId} />
+            <Col className="avatarCol">
+              <UserAvatar
+                width={"10vh"}
+                height={"10vh"}
+                border={"#EA7601"}
+                avatarId={user.avatarId}
+              />
             </Col>
             <Col>
-              <Row className = "paraRow">
-              <p className="mb-0" style={{wordWrap: "break"}} >{`Welcome ${user.username}!`}</p>
+              <Row className="paraRow">
+                <p
+                  className="mb-0"
+                  style={{ wordWrap: "break" }}
+                >{`Welcome ${user.username}!`}</p>
               </Row>
-              <Row className = "buttonRow m-0">
-                <Button className="logoutBtn" small onClick={logout}>Logout</Button>
+              <Row className="buttonRow m-0">
+                <Button className="logoutBtn" small onClick={logout}>
+                  Logout
+                </Button>
               </Row>
             </Col>
           </Row>
         </div>
-        <DatePicker/>
+        <DatePicker />
       </div>
 
       <Routes>
-        <Route path="/" element={
-          <>
-            <DeskViewer />
-          </>
-        }></Route>
+        <Route
+          path="/"
+          element={
+            <>
+              <DeskViewer />
+            </>
+          }
+        ></Route>
       </Routes>
     </Container>
   );

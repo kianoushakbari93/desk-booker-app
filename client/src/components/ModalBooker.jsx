@@ -1,10 +1,6 @@
 import { useContext, useState } from "react";
 
-import {
-  ModalBody,
-  ModalHeader,
-  ModalTitle,
-} from "react-bootstrap";
+import { ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 import "toastr/build/toastr.min.css";
 
 import toastr from "../customToastr";
@@ -25,9 +21,11 @@ const ModalBooker = ({
 
   const canDelete =
     ((hasBooking && desk.booking.user.id == user.id) ||
-    (user.admin && hasBooking)) &&  !isBeforeToday(selectedDate, getToday());
+      (user.admin && hasBooking)) &&
+    !isBeforeToday(selectedDate, getToday());
   const canCreate =
-    ((!hasBooking && !userHasBookingToday) || (!hasBooking && user.admin)) && !isBeforeToday(selectedDate, getToday());
+    ((!hasBooking && !userHasBookingToday) || (!hasBooking && user.admin)) &&
+    !isBeforeToday(selectedDate, getToday());
 
   const [userId, setUserId] = useState(user.id);
 
@@ -88,8 +86,12 @@ const ModalBooker = ({
       </ModalHeader>
       <ModalBody className="modalCustom background">
         <p>Status: {status}</p>
-        {(user.admin && !hasBooking) && <UserSelectField setUserId={setUserId} />}
-        {canCreate && <Button disabled={user.admin && isNil(userId)} onClick={handleBook}>Create Booking</Button>}
+        {user.admin && !hasBooking && <UserSelectField setUserId={setUserId} />}
+        {canCreate && (
+          <Button disabled={user.admin && isNil(userId)} onClick={handleBook}>
+            Create Booking
+          </Button>
+        )}
         {canDelete && <Button onClick={handleDelete}>Cancel Booking</Button>}
       </ModalBody>
     </div>
